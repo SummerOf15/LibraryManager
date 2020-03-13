@@ -10,6 +10,15 @@ import java.util.List;
 
 
 public class MembreDaoImpl implements MembreDao{
+
+    private MembreDaoImpl(){}
+    private static class MembreDaoImplInstance{
+        private static final MembreDaoImpl INSTANCE=new MembreDaoImpl();
+    }
+    public static MembreDaoImpl getInstance(){
+        return MembreDaoImpl.MembreDaoImplInstance.INSTANCE;
+    }
+
     @Override
     public List<Membre> getList() throws DaoException {
         ResultSet resultSet;

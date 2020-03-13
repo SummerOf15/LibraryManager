@@ -10,6 +10,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LivreDaoImpl implements LivreDao {
+
+    private LivreDaoImpl(){}
+    private static class LivreDaoImplInstance{
+        private static final LivreDaoImpl INSTANCE=new LivreDaoImpl();
+    }
+    public static LivreDaoImpl getInstance(){
+        return LivreDaoImpl.LivreDaoImplInstance.INSTANCE;
+    }
+
     @Override
     public List<Livre> getList() throws DaoException {
         PreparedStatement selectPreparedStatement = null;

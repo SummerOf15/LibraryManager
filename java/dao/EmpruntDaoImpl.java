@@ -2,6 +2,7 @@ package dao;
 
 import model.Emprunt;
 import persistence.ConnectionManager;
+import service.EmpruntServiceImpl;
 
 import java.sql.*;
 import java.time.LocalDate;
@@ -9,6 +10,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EmpruntDaoImpl implements EmpruntDao{
+    private EmpruntDaoImpl(){}
+    private static class EmpruntDaoImplInstance{
+        private static final EmpruntDaoImpl INSTANCE=new EmpruntDaoImpl();
+    }
+    public static EmpruntDaoImpl getInstance(){
+        return EmpruntDaoImpl.EmpruntDaoImplInstance.INSTANCE;
+    }
+
     @Override
     public List<Emprunt> getList() throws DaoException {
         PreparedStatement selectPreparedStatement = null;
