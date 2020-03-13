@@ -36,7 +36,7 @@ INSERT INTO Membre(nom, prenom, adresse, email, telephone, abonnement) VALUES(?,
 	at org.h2.jdbc.JdbcPreparedStatement.executeUpdateInternal(JdbcPreparedStatement.java:191)
 	at org.h2.jdbc.JdbcPreparedStatement.executeUpdate(JdbcPreparedStatement.java:152)
 	at dao.MembreDaoImpl.create(MembreDaoImpl.java:105)
-	at test.testModel.main(testModel.java:20)
+	at test.ModelTest.main(testModel.java:20)
 2020-03-06 21:48:42 jdbc[3]: exception
 org.h2.jdbc.JdbcSQLNonTransientException: No data is available [2000-200]
 2020-03-10 10:05:02 jdbc[3]: exception
@@ -53,4 +53,4 @@ UPDATE Emprunt SET idMembre=?, idLivre=?, dateEmprunt=?, dateRetour=? WHERE Id=?
 	at org.h2.jdbc.JdbcPreparedStatement.executeUpdateInternal(JdbcPreparedStatement.java:191)
 	at org.h2.jdbc.JdbcPreparedStatement.executeUpdate(JdbcPreparedStatement.java:152)
 	at dao.EmpruntDaoImpl.update(EmpruntDaoImpl.java:260)
-	at test.testModel.main(testModel.java:22)
+	at test.ModelTest.main(testModel.java:22)
