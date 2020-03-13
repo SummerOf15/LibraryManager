@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import org.h2.jdbcx.JdbcDataSource;
 
 public class ConnectionManager {
-	private static final String DB_CONNECTION = "jdbc:h2:./libraryManagerDatabase";
+	private static final String DB_CONNECTION = "jdbc:h2:./src/main/webapp/libraryManagerDatabase";
 	private static final String DB_USER = "";
 	private static final String DB_PASSWORD = "";
 

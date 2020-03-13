@@ -16,7 +16,7 @@ public class FillDatabase {
 
     public static void main(String[] args) throws Exception {
         try {
-            DeleteDbFiles.execute("~", "libraryManagerDatabase", true);
+            DeleteDbFiles.execute("./src/main/webapp/", "libraryManagerDatabase", true);
             insertWithPreparedStatement();
         } catch (SQLException e) {
             e.printStackTrace();

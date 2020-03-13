@@ -4,14 +4,14 @@ import java.time.LocalDate;
 
 public class Emprunt {
     private int id;
-    private int idMenbre, idLivre;
+    private int idMembre, idLivre;
     private LocalDate dateEmprunt, dateRetour;
 
     public Emprunt(){}
 
-    public Emprunt(int id, int idMenbre, int idLivre, LocalDate dateEmprunt, LocalDate dateRetour) {
+    public Emprunt(int id, int idMembre, int idLivre, LocalDate dateEmprunt, LocalDate dateRetour) {
         this.id = id;
-        this.idMenbre = idMenbre;
+        this.idMembre = idMembre;
         this.idLivre = idLivre;
         this.dateEmprunt = dateEmprunt;
         this.dateRetour = dateRetour;
@@ -25,12 +25,12 @@ public class Emprunt {
         this.id = id;
     }
 
-    public int getIdMenbre() {
-        return idMenbre;
+    public int getIdMembre() {
+        return idMembre;
     }
 
     public void setIdMenbre(int idMenbre) {
-        this.idMenbre = idMenbre;
+        this.idMembre = idMembre;
     }
 
     public int getIdLivre() {
@@ -61,7 +61,7 @@ public class Emprunt {
     public String toString() {
         return "Emprunt{" +
                 "id=" + id +
-                ", idMenbre=" + idMenbre +
+                ", idMenbre=" + idMembre +
                 ", idLivre=" + idLivre +
                 ", dateEmprunt=" + dateEmprunt +
                 ", dateRetour=" + dateRetour +
