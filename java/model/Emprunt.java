@@ -29,7 +29,7 @@ public class Emprunt {
         return idMembre;
     }
 
-    public void setIdMenbre(int idMenbre) {
+    public void setIdMembre(int idMembre) {
         this.idMembre = idMembre;
     }
 
@@ -61,7 +61,7 @@ public class Emprunt {
     public String toString() {
         return "Emprunt{" +
                 "id=" + id +
-                ", idMenbre=" + idMembre +
+                ", idMembre=" + idMembre +
                 ", idLivre=" + idLivre +
                 ", dateEmprunt=" + dateEmprunt +
                 ", dateRetour=" + dateRetour +

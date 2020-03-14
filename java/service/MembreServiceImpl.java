@@ -26,6 +26,7 @@ public class MembreServiceImpl implements MembreService {
             return membreDao.getList();
         }
         catch (Exception e){
+            System.out.println("getList error");
             throw new ServiceException();
         }
     }

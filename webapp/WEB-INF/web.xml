@@ -4,4 +4,30 @@
 
 <web-app>
   <display-name>Archetype Created Web Application</display-name>
+
+  <servlet>
+    <servlet-name>DashboardServlet</servlet-name>
+    <servlet-class>servlet.DashboardServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>EmpruntReturnServlet</servlet-name>
+    <servlet-class>servlet.EmpruntReturnServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>EmpruntAddServlet</servlet-name>
+    <servlet-class>servlet.EmpruntAddServlet</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>DashboardServlet</servlet-name>
+    <url-pattern>/dashboard</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>EmpruntReturnServlet</servlet-name>
+    <url-pattern>/emprunt_return</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>EmpruntAddServlet</servlet-name>
+    <url-pattern>/emprunt_add</url-pattern>
+  </servlet-mapping>
 </web-app>

@@ -8,6 +8,7 @@ import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.SynchronousQueue;
 
 public class EmpruntDaoImpl implements EmpruntDao{
     private EmpruntDaoImpl(){}
@@ -34,7 +35,7 @@ public class EmpruntDaoImpl implements EmpruntDao{
             {
                 Emprunt emprunt=new Emprunt();
                 emprunt.setId(resultSet.getInt(1));
-                emprunt.setIdMenbre(resultSet.getInt(2));
+                emprunt.setIdMembre(resultSet.getInt(2));
                 emprunt.setIdLivre(resultSet.getInt(3));
                 emprunt.setDateEmprunt(resultSet.getDate(4).toLocalDate());
                 if(resultSet.getDate(5)==null)
@@ -67,6 +68,7 @@ public class EmpruntDaoImpl implements EmpruntDao{
         Connection connection = null;
         try{
             connection = ConnectionManager.getConnection();
+            System.out.println("connection succeed");
             String SelectQuery = "SELECT * FROM Emprunt WHERE dateRetour IS NULL ";
             connection.setAutoCommit(false);
             selectPreparedStatement = connection.prepareStatement(SelectQuery);
@@ -75,7 +77,7 @@ public class EmpruntDaoImpl implements EmpruntDao{
             {
                 Emprunt emprunt=new Emprunt();
                 emprunt.setId(resultSet.getInt(1));
-                emprunt.setIdMenbre(resultSet.getInt(2));
+                emprunt.setIdMembre(resultSet.getInt(2));
                 emprunt.setIdLivre(resultSet.getInt(3));
                 emprunt.setDateEmprunt(resultSet.getDate(4).toLocalDate());
                 emprunt.setDateRetour(null);
@@ -88,6 +90,7 @@ public class EmpruntDaoImpl implements EmpruntDao{
             connection.close();
         }
         catch (SQLException se){
+            System.out.println("connection failed");
             throw new DaoException();
         }
         catch (Exception e){
@@ -114,7 +117,7 @@ public class EmpruntDaoImpl implements EmpruntDao{
             {
                 Emprunt emprunt=new Emprunt();
                 emprunt.setId(resultSet.getInt(1));
-                emprunt.setIdMenbre(resultSet.getInt(2));
+                emprunt.setIdMembre(resultSet.getInt(2));
                 emprunt.setIdLivre(resultSet.getInt(3));
                 emprunt.setDateEmprunt(resultSet.getDate(4).toLocalDate());
                 if(resultSet.getDate(5)==null)
@@ -156,7 +159,7 @@ public class EmpruntDaoImpl implements EmpruntDao{
             {
                 Emprunt emprunt=new Emprunt();
                 emprunt.setId(resultSet.getInt(1));
-                emprunt.setIdMenbre(resultSet.getInt(2));
+                emprunt.setIdMembre(resultSet.getInt(2));
                 emprunt.setIdLivre(resultSet.getInt(3));
                 emprunt.setDateEmprunt(resultSet.getDate(4).toLocalDate());
                 if(resultSet.getDate(5)==null)
@@ -197,7 +200,7 @@ public class EmpruntDaoImpl implements EmpruntDao{
             while(resultSet.next())
             {
                 emprunt.setId(resultSet.getInt(1));
-                emprunt.setIdMenbre(resultSet.getInt(2));
+                emprunt.setIdMembre(resultSet.getInt(2));
                 emprunt.setIdLivre(resultSet.getInt(3));
                 emprunt.setDateEmprunt(resultSet.getDate(4).toLocalDate());
                 if(resultSet.getDate(5)==null)

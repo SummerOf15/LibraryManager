@@ -36,6 +36,8 @@ public class EmpruntServiceImpl implements EmpruntService{
             return empruntDao.getListCurrent();
         }
         catch (Exception e){
+            System.out.println("getListCurrent() error");
+            e.printStackTrace();
             throw new ServiceException();
         }
     }
@@ -46,6 +48,7 @@ public class EmpruntServiceImpl implements EmpruntService{
             return empruntDao.getListCurrentByMembre(idMembre);
         }
         catch (Exception e){
+            System.out.println("getListCurrentByMembre() error");
             throw new ServiceException();
         }
     }
