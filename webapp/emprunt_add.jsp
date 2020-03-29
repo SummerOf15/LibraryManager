@@ -1,7 +1,6 @@
 <%@ page import="model.Livre" %>
 <%@ page import="java.util.List" %>
 <%@ page import="model.Membre" %>
-<%@ page import="service.MembreService" %>
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 <!DOCTYPE html>
 <html>
@@ -32,9 +31,10 @@
 	          <div class="input-field col s6">
 	            <select id="idLivre" name="idLivre" class="browser-default">
 	              <option value="" disabled selected>-- Livres --</option>
-	              <!-- TODO : parcourir la liste des livres disponibles et afficher autant d'options que nécessaire, sur la base de l'exemple ci-dessous -->
+	              <!-- TODO : parcourir la liste des livres disponibles et afficher autant d'options que n?cessaire, sur la base de l'exemple ci-dessous -->
                   <%
                       List<Livre> livreList=(List<Livre>)request.getAttribute("AvailableLivres");
+
                       for(Livre livre:livreList){
                   %>
                     <option value=<%=livre.getId()%>><%=livre.getTitre()%>,<%=livre.getAuteur()%></option>
@@ -46,7 +46,7 @@
 	          <div class="input-field col s6">
 	            <select id="idMembre" name="idMembre" class="browser-default">
 	              <option value="" disabled selected>-- Membres --</option>
-	              <!-- TODO : parcourir la liste des membres pouvant emprunter et afficher autant d'options que nécessaire, sur la base de l'exemple ci-dessous -->
+	              <!-- TODO : parcourir la liste des membres pouvant emprunter et afficher autant d'options que n?cessaire, sur la base de l'exemple ci-dessous -->
                     <%
                         List<Membre> membreList=(List<Membre>)request.getAttribute("AvailableMembres");
                         for(Membre membre:membreList){

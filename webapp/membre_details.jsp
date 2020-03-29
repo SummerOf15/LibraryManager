@@ -1,3 +1,7 @@
+<%@ page import="model.Emprunt" %>
+<%@ page import="java.util.List" %>
+<%@ page import="model.Livre" %>
+<%@ page import="model.Membre" %>
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 <!DOCTYPE html>
 <html>
@@ -21,41 +25,44 @@
       </div>
       <div class="row">
       <div class="container">
-      <h5>Détails du membre n°007</h5> <!-- TODO : remplacer 007 par l'id du membre -->
+		  <%
+			  Membre mem=(Membre) request.getAttribute("membre");
+		  %>
+      <h5>Détails du membre n°<%=mem.getId()%></h5> <!-- TODO : remplacer 007 par l'id du membre -->
         <div class="row">
-	      <form action="/LibraryManager/membre_details?id=idDuMembre" method="post" class="col s12"> <!-- TODO : remplacer idDuMembre par l'id du membre -->
+	      <form action="membre_details?id=<%=mem.getId()%>" method="post" class="col s12"> <!-- TODO : remplacer idDuMembre par l'id du membre -->
 	        <div class="row">
 	          <div class="input-field col s4">
-	            <input id="nom" type="text" value="nomDuMembre" name="nom"> <!-- TODO : remplacer nomDuMembre par le nom du membre -->
+	            <input id="nom" type="text" value="<%=mem.getNom()%>" name="nom"> <!-- TODO : remplacer nomDuMembre par le nom du membre -->
 	            <label for="nom">Nom</label>
 	          </div>
 	          <div class="input-field col s4">
-	            <input id="prenom" type="text" value="prenomDuMembre" name="prenom"> <!-- TODO : remplacer prenomDuMembre par le prénom du membre -->
+	            <input id="prenom" type="text" value="<%=mem.getPrenom()%>" name="prenom"> <!-- TODO : remplacer prenomDuMembre par le prénom du membre -->
 	            <label for="prenom">Prénom</label>
 	          </div>
 	          <div class="input-field col s4">
 	            <select name="abonnement" class="browser-default">
 	              <!-- TODO : faire en sorte que l'option correspondant à l'abonnement du membre soit sélectionnée par défaut -->
 	              <!-- Pour cela, vous devez rajouter l'attribut selecter sur la balise <option> concernée -->
-	              <option value="BASIC" ${(membre.abonnement == "BASIC") ? " selected" : ""}>Abonnement BASIC</option>
-	              <option value="PREMIUM" ${(membre.abonnement == "PREMIUM") ? " selected" : ""}>Abonnement PREMIUM</option>
-	              <option value="VIP" ${(membre.abonnement == "VIP") ? " selected" : ""}>Abonnement VIP</option>
+	              <option value="BASIC" <%=(mem.getAbonnement().getName().equals("BASIC")) ? " selected" : ""%>>Abonnement BASIC</option>
+	              <option value="PREMIUM" <%=(mem.getAbonnement().getName().equals("PREMIUM")) ? " selected" : ""%>>Abonnement PREMIUM</option>
+	              <option value="VIP" <%=(mem.getAbonnement().getName().equals("VIP")) ? " selected" : ""%>>Abonnement VIP</option>
 	            </select>
 	          </div>
 	        </div>
 	        <div class="row">
 	          <div class="input-field col s12">
-	            <input id="adresse" type="text" value="adresseDuMembre" name="adresse"> <!-- TODO : remplacer adresseDuMembre par l'adresse du membre -->
+	            <input id="adresse" type="text" value="<%=mem.getAdresse()%>" name="adresse"> <!-- TODO : remplacer adresseDuMembre par l'adresse du membre -->
 	            <label for="adresse">Adresse</label>
 	          </div>
 	        </div>
 	        <div class="row">
 	          <div class="input-field col s6">
-	            <input id="email" type="email" value="emailDuMembre" name="email"> <!-- TODO : remplacer emailDuMembre par l'email du membre -->
+	            <input id="email" type="email" value="<%=mem.getEmail()%>" name="email"> <!-- TODO : remplacer emailDuMembre par l'email du membre -->
 	            <label for="email">E-mail</label>
 	          </div>
 	          <div class="input-field col s6">
-	            <input id="telephone" type="tel" value="telephoneDuMembre" name="telephone"> <!-- TODO : remplacer telephoneDuMembre par le téléphone du membre -->
+	            <input id="telephone" type="tel" value="<%=mem.getTelephone()%>" name="telephone"> <!-- TODO : remplacer telephoneDuMembre par le téléphone du membre -->
 	            <label for="telephone">Téléphone</label>
 	          </div>
 	        </div>
@@ -65,8 +72,8 @@
 	        </div>
 	      </form>
 	      
-	      <form action="/LibraryManager/membre_delete" method="get" class="col s12">
-	        <input type="hidden" value="idDuMembre" name="id"> <!-- TODO : remplacer idDuMembre par l'id du membre -->
+	      <form action="membre_delete" method="get" class="col s12">
+	        <input type="hidden" value="<%=mem.getId()%>" name="id"> <!-- TODO : remplacer idDuMembre par l'id du membre -->
 	        <div class="row center">
 	          <button class="btn waves-effect waves-light red" type="submit">Supprimer le membre
 	            <i class="material-icons right">delete</i>
@@ -86,18 +93,23 @@
               </thead>
               <tbody id="results">
 
-                <c:forEach var="emprunt" items="${emprunts}">
+                <%
+					List<Emprunt> empruntList=(List<Emprunt>)request.getAttribute("EmpruntList");
+					List<Livre> livreList=(List<Livre>)request.getAttribute("EmpruntLivres");
+					for(int i=0;i<empruntList.size();i++){
+                %>
                 <tr>
-                  <td>Prénom et nom du membre emprunteur</td>
-                  <td>Date de l'emprunt</td>
+                  <td><%=livreList.get(i).getTitre()%></td>
+                  <td><%=empruntList.get(i).getDateEmprunt()%></td>
                   <td>
-                    <a href="emprunt_return?id=idDeLEmprunt"><ion-icon class="table-item" name="log-in"></a>
+                    <a href="emprunt_return?id=<%=livreList.get(i).getId()%>"><ion-icon class="table-item" name="log-in"/></a>
                   </td>
                 </tr>
-                </c:forEach>
+               <%
+				   }
+               %>
 
-				<!-- TODO : parcourir la liste des emprunts en cours pour ce membre et les afficher selon la structure d'exemple ci-dessus -->
-              </tbody>
+				</tbody>
             </table>
           </div>
         </div>

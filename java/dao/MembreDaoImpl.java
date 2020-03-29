@@ -108,7 +108,7 @@ public class MembreDaoImpl implements MembreDao{
             insertPreparedStatement.setString(3,adresse);
             insertPreparedStatement.setString(4,email);
             insertPreparedStatement.setString(5,telephone);
-            insertPreparedStatement.setString(6,null);
+            insertPreparedStatement.setString(6,Abonnement.BASIC.getName());
 
             int num = insertPreparedStatement.executeUpdate();// insert data
             if(num>0)
@@ -162,7 +162,8 @@ public class MembreDaoImpl implements MembreDao{
             throw new DaoException();
         }
         catch (Exception e){
-            System.out.println(e+", update failed.");
+            System.out.println(membre.toString());
+            throw new DaoException(e+", update failed."+membre.toString());
         }
     }
 

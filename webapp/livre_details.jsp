@@ -1,4 +1,8 @@
+<%@ page import="model.Livre" %>
+<%@ page import="model.Emprunt" %>
+<%@ page import="model.Membre" %>
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
+<%@ page contentType="text/html; charset=gb2312"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,22 +25,25 @@
       </div>
       <div class="row">
       <div class="container">
-      <h5>Détails du livre n°${livre.id}</h5>
+          <%
+              Livre livre=(Livre)request.getAttribute("livre");
+          %>
+      <h5>D¨¦tails du livre n¡ã<%=livre.getId()%></h5>
         <div class="row">
-	      <form action="/LibraryManager/livre_details?id=idDuLivre" method="post" class="col s12"> <!-- TODO : remplacer idDuLivre par l'id du livre -->
+	      <form action="livre_details?id=<%=livre.getId()%>" method="post" class="col s12"> <!-- TODO : remplacer idDuLivre par l'id du livre -->
 	        <div class="row">
 	          <div class="input-field col s12">
-	            <input id="titre" type="text" value="titreDuLivre" name="titre"> <!-- TODO : remplacer titreDuLivre par le titre du livre -->
+	            <input id="titre" type="text" value="<%=livre.getTitre()%>" name="titre"> <!-- TODO : remplacer titreDuLivre par le titre du livre -->
 	            <label for="titre">Titre</label>
 	          </div>
 	        </div>
 	        <div class="row">
 	          <div class="input-field col s6">
-	            <input id="auteur" type="text" value="auteurDuLivre" name="auteur"> <!-- TODO : remplacer auteurDuLivre par l'auteur du livre -->
+	            <input id="auteur" type="text" value="<%=livre.getAuteur()%>" name="auteur"> <!-- TODO : remplacer auteurDuLivre par l'auteur du livre -->
 	            <label for="auteur">Auteur</label>
 	          </div>
 	          <div class="input-field col s6">
-	            <input id="isbn" type="text" value="isbnDuLivre" name="isbn"> <!-- TODO : remplacer isbnDuLivre par l'isbn du livre -->
+	            <input id="isbn" type="text" value="<%=livre.getIsbn()%>" name="isbn"> <!-- TODO : remplacer isbnDuLivre par l'isbn du livre -->
 	            <label for="isbn">ISBN 13</label>
 	          </div>
 	        </div>
@@ -46,8 +53,8 @@
 	        </div>
 	      </form>
 	      
-	      <form action="/LibraryManager/livre_delete" method="get" class="col s12">
-	        <input type="hidden" value="idDuLivre" name="id"> <!-- TODO : remplacer idDuLivre par l'id du livre -->
+	      <form action="livre_delete" method="get" class="col s12">
+	        <input type="hidden" value=<%=livre.getId()%> name="id"> <!-- TODO : remplacer idDuLivre par l'id du livre -->
 	        <div class="row center">
 	          <button class="btn waves-effect waves-light red" type="submit">Supprimer le livre
 	            <i class="material-icons right">delete</i>
@@ -66,16 +73,22 @@
                 </tr>
               </thead>
               <tbody id="results">
-
-                <tr>
-                  <td>Prénom et nom du membre emprunteur</td>
-                  <td>Date de l'emprunt</td>
-                  <td>
-                    <a href="emprunt_return?id=idDeLEmprunt"><ion-icon class="table-item" name="log-in"></a>
-                  </td>
-                </tr>
-
 				<!-- TODO : parcourir la liste des emprunts en cours pour ce livre et les afficher selon la structure d'exemple ci-dessus -->
+                  <%
+                      Emprunt emprunt=(Emprunt)request.getAttribute("CurrentEmprunt");
+                      Membre membre=(Membre) request.getAttribute("Emprunteur");
+                      if(emprunt!=null && membre!=null){
+                  %>
+                <tr>
+                    <td><%=membre.getPrenom()%> <%=membre.getNom()%></td>
+                    <td><%=emprunt.getDateEmprunt()%></td>
+                    <td>
+                        <a href="emprunt_return?id=<%=livre.getId()%>>"><ion-icon class="table-item" name="log-in"/></a>
+                    </td>
+                </tr>
+              <%
+                    }
+              %>
               </tbody>
             </table>
           </div>

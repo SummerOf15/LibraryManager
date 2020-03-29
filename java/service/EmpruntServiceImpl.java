@@ -11,6 +11,7 @@ import java.util.List;
 
 public class EmpruntServiceImpl implements EmpruntService{
     private EmpruntDao empruntDao=EmpruntDaoImpl.getInstance();
+    private MembreService membreService=MembreServiceImpl.getInstance();
 
     private EmpruntServiceImpl(){}
     private static class EmpruntServiceImplInstance{
@@ -76,7 +77,11 @@ public class EmpruntServiceImpl implements EmpruntService{
     @Override
     public void create(int idMembre, int idLivre, LocalDate dateEmprunt) throws ServiceException {
         try{
-            empruntDao.create(idMembre,idLivre,dateEmprunt);
+            Membre membre=membreService.getById(idMembre);
+            if(this.isEmpruntPossible(membre))
+                empruntDao.create(idMembre,idLivre,dateEmprunt);
+            else
+                throw new ServiceException("Achieve the maximum number of borrowed books");
         }
         catch (Exception e){
             throw new ServiceException();
@@ -111,11 +116,12 @@ public class EmpruntServiceImpl implements EmpruntService{
     public boolean isLivreDispo(int idLivre) throws ServiceException {
         try{
             List<Emprunt> empruntList=empruntDao.getListCurrentByLivre(idLivre);
-            if(empruntList.get(empruntList.size()-1) == null){
+            if(empruntList.size()>0 && empruntList.get(empruntList.size()-1).getDateRetour() != null){
                 return true;
             }
         }
         catch (Exception e){
+            System.out.println(e.toString());
             throw new ServiceException();
         }
         return false;
@@ -132,7 +138,7 @@ public class EmpruntServiceImpl implements EmpruntService{
                 return true;
         }
         catch (Exception e){
-            throw new ServiceException();
+            throw new ServiceException("isEmpruntPossible error when check Membre:"+membre.toString());
         }
     }
 }

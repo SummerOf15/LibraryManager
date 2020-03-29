@@ -18,7 +18,7 @@
     <section class="content">
       <div class="page-announce valign-wrapper">
         <a href="#" data-activates="slide-out" class="button-collapse valign hide-on-large-only"><i class="material-icons">menu</i></a>
-        <h1 class="page-announce-text valign">Erreur 500</h1>
+        <h1 class="page-announce-text valign">Erreur 404</h1>
       </div>
       <div class="row">
         <div class="container">

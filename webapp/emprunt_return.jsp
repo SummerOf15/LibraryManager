@@ -1,3 +1,6 @@
+<%@ page import="model.Livre" %>
+<%@ page import="model.Membre" %>
+<%@ page import="java.util.List" %>
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 <!DOCTYPE html>
 <html>
@@ -21,16 +24,33 @@
       </div>
       <div class="row">
       <div class="container">
-        <h5>S¨¦lectionnez le livre ¨¤ retourner</h5>
+        <h5>Sélectionnez le livre à retourner</h5>
         <div class="row">
 	      <form action="emprunt_return" method="post" class="col s12">
 	        <div class="row">
 	          <div class="input-field col s12">
 	            <select id="id" name="id" class="browser-default">
-	              <option value="" disabled selected>---</option>
-                  <!-- TODO : parcourir la liste des emprunts non rendus et afficher autant d'options que n?cessaire, sur la base de l'exemple ci-dessous -->
+                    <option value="" disabled selected>---</option>
+                    <%
+                        List<Livre> livreList=(List<Livre>) request.getAttribute("LivreList");
+                        List<Membre> membreList=(List<Membre>) request.getAttribute("MembreList");
+                        if(livreList!=null && membreList!=null ){
+                            if(livreList.size()==1){
+                    %>
+                    <option selected="selected" value=<%=livreList.get(0).getId()%>><%=livreList.get(0).getTitre()%>, emprunté par <%=membreList.get(0).getPrenom()%> <%=membreList.get(0).getNom()%></option>
+                  <!-- TODO : parcourir la liste des emprunts non rendus et afficher autant d'options que n¨¦cessaire, sur la base de l'exemple ci-dessous -->
                   <!-- TODO : si l'attribut id existe, l'option correspondante devra ?tre s?lectionn?e par d?faut (ajouter l'attribut selected dans la balise <option>) -->
-                  <option value="idDeLEmprunt">"Titre du livre", emprunt? par Pr?nom et nom du membre emprunteur</option>
+                    <%
+                            }
+                            else{
+                                for(int i=0;i<livreList.size();i++) {
+                    %>
+                    <option value=<%=livreList.get(i).getId()%>><%=livreList.get(i).getTitre()%>, emprunté par <%=membreList.get(i).getPrenom()%> <%=membreList.get(i).getNom()%></option>
+                    <%
+                                }
+                            }
+                        }
+                    %>
 	            </select>
 	          </div>
 	        </div>

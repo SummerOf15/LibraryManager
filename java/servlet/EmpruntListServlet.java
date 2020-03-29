@@ -13,7 +13,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DashboardServlet extends HttpServlet {
+public class EmpruntListServlet extends HttpServlet {
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         EmpruntService empruntService= EmpruntServiceImpl.getInstance();
@@ -21,23 +22,24 @@ public class DashboardServlet extends HttpServlet {
         MembreService membreService= MembreServiceImpl.getInstance();
         try{
             List<Emprunt> empruntList= empruntService.getListCurrent();
+            if(req.getParameter("show")!=null){  // avoid comparing these two string directly, otherwise it will case un exception
+                if(req.getParameter("show").equals("all"))
+                    empruntList= empruntService.getList();
+            }
             List<Livre> livreList=new ArrayList<>();
             List<Membre> membreList=new ArrayList<>();
             for(Emprunt emprunt:empruntList){
                 livreList.add(livreService.getById(emprunt.getIdLivre()));
                 membreList.add(membreService.getById(emprunt.getIdMembre()));
             }
-            req.setAttribute("MembresNumber",membreService.count());
-            req.setAttribute("LivresNumber",livreService.count());
-            req.setAttribute("EmpruntsNumber",empruntService.count());
             req.setAttribute("CurrentEmprunt",empruntList);
             req.setAttribute("LivreList",livreList);
             req.setAttribute("MembreList",membreList);
         }
         catch (Exception e){
-            System.out.println("get error,"+e.toString());
+            System.out.println("EmpruntListServlet doget() error,"+e.toString());
             e.printStackTrace();
         }
-        req.getRequestDispatcher("/dashboard.jsp").forward(req,resp);
+        req.getRequestDispatcher("/emprunt_list.jsp").forward(req,resp);
     }
 }

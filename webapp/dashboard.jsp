@@ -46,7 +46,7 @@
             <div class="icon">
               <ion-icon name="book"></ion-icon>
             </div>
-            <a href="livre_list.jsp" class="small-box-footer" class="animsition-link">Liste des livres <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="livre_list" class="small-box-footer" class="animsition-link">Liste des livres <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
         <div class="col l4 s6">
@@ -58,7 +58,7 @@
             <div class="icon">
               <ion-icon name="bookmarks"></ion-icon>
             </div>
-            <a href="emprunt_list.jsp" class="small-box-footer" class="animsition-link">Liste des emprunts <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="emprunt_list" class="small-box-footer" class="animsition-link">Liste des emprunts <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
         <div class="container">

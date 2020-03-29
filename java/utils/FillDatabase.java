@@ -13,10 +13,9 @@ import persistence.ConnectionManager;
 
 public class FillDatabase {
 
-
     public static void main(String[] args) throws Exception {
         try {
-            DeleteDbFiles.execute("./src/main/webapp/", "libraryManagerDatabase", true);
+            DeleteDbFiles.execute("~", "libraryManagerDatabase", true);
             insertWithPreparedStatement();
         } catch (SQLException e) {
             e.printStackTrace();

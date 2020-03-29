@@ -11,6 +11,7 @@ import java.util.List;
 
 public class MembreServiceImpl implements MembreService {
     private MembreDao membreDao= MembreDaoImpl.getInstance();
+    private EmpruntService empruntService=EmpruntServiceImpl.getInstance();
 
     private MembreServiceImpl(){}
     private static class MembreServiceImplInstance{
@@ -35,7 +36,7 @@ public class MembreServiceImpl implements MembreService {
     public List<Membre> getListMembreEmpruntPossible() throws ServiceException {
         try{
             List<Membre> membreList=new ArrayList<>();
-            EmpruntService empruntService=EmpruntServiceImpl.getInstance();
+
             for(Membre membre:getList()){
                 if(empruntService.isEmpruntPossible(membre)){
                     membreList.add(membre);
@@ -74,12 +75,13 @@ public class MembreServiceImpl implements MembreService {
     public void update(Membre membre) throws ServiceException {
         try {
             if(membre.getPrenom()==null || membre.getNom()==null){
-                throw new ServiceException();
+                throw new ServiceException("nom or prenom is null");
             }
-            membreDao.update(membre);
+            else
+                membreDao.update(membre);
         }
         catch (Exception e){
-            throw new ServiceException();
+            throw new ServiceException("update error:"+membre.toString());
         }
     }
 

@@ -1,3 +1,5 @@
+<%@ page import="model.Livre" %>
+<%@ page import="java.util.List" %>
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 <!DOCTYPE html>
 <html>
@@ -31,15 +33,20 @@
                     </tr>
                 </thead>
                 <tbody>
-                
-                    <tr>
-                        <td>Titre du livre</td>
-                        <td>Nom de l'auteur</td>
-                        <td>ISBN du livre</td>
-                        <td class="center"><a href="livre_details?id=idDuLivre"><ion-icon class="details" name="information-circle-outline"></ion-icon></a></td>
-                    </tr>
-                    
                     <!-- TODO : parcourir la liste des livres et les afficher selon la structure d'exemple ci-dessus -->
+                    <%
+                        List<Livre> livreList=(List<Livre>)request.getAttribute("LivreList");
+                        for(Livre livre:livreList){
+                    %>
+                    <tr>
+                        <td><%=livre.getTitre()%></td>
+                        <td><%=livre.getAuteur()%></td>
+                        <td><%=livre.getIsbn()%></td>
+                        <td class="center"><a href="livre_details?id=<%=livre.getId()%>"><ion-icon class="details" name="information-circle-outline"></ion-icon></a></td>
+                    </tr>
+                    <%
+                        }
+                    %>
                 </tbody>
             </table>
           </div>

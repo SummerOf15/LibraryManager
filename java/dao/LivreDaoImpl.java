@@ -142,6 +142,7 @@ public class LivreDaoImpl implements LivreDao {
             updatePreparedStatement.setString(1,livre.getTitre());
             updatePreparedStatement.setString(2,livre.getAuteur());
             updatePreparedStatement.setString(3, livre.getIsbn());
+            updatePreparedStatement.setInt(4, livre.getId());
 
             int num = updatePreparedStatement.executeUpdate();// insert data
             if(num>0)
@@ -152,11 +153,8 @@ public class LivreDaoImpl implements LivreDao {
             updatePreparedStatement.close();
             connection.close();
         }
-        catch (SQLException se){
-            throw new DaoException();
-        }
         catch (Exception e){
-            System.out.println(e+", update failed.");
+            throw new DaoException(e+", update failed."+livre.toString());
         }
     }
 

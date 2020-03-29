@@ -1,3 +1,5 @@
+<%@ page import="model.Membre" %>
+<%@ page import="java.util.List" %>
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 <!DOCTYPE html>
 <html>
@@ -33,18 +35,22 @@
               </tr>
             </thead>
             <tbody>
-
+            <%
+              List<Membre> membreList=(List<Membre>)request.getAttribute("MembreList");
+              for(Membre membre:membreList){
+            %>
               <tr>
-                <td>Nom du membre</td>
-                <td>Prénom du membre</td>
-                <td class="hide-on-small-only">Adresse du membre</td>
-                <td class="hide-on-small-only">E-mail du membre</td>
-                <td class="hide-on-small-only">Téléphone du membre</td>
-                <td class="center"><a href="membre_details?id=idDuMembre"><ion-icon class="details" name="information-circle-outline"></ion-icon></a></td>
+                <td><%=membre.getNom()%></td>
+                <td><%=membre.getPrenom()%></td>
+                <td class="hide-on-small-only"><%=membre.getAdresse()%></td>
+                <td class="hide-on-small-only"><%=membre.getEmail()%></td>
+                <td class="hide-on-small-only"><%=membre.getTelephone()%></td>
+                <td class="center"><a href="membre_details?id=<%=membre.getId()%>"><ion-icon class="details" name="information-circle-outline"></ion-icon></a></td>
               </tr>
-
-              <!-- TODO : parcourir la liste des membres et les afficher selon la structure d'exemple ci-dessus -->
-            </tbody>
+            <%
+              }
+            %>
+             </tbody>
           </table>
         </div>
       </div>
